@@ -13,6 +13,7 @@ $ echo "deb https://baltocdn.com/helm/stable/debian/ all main" | sudo tee /etc/a
 $ sudo apt-get update
 $ sudo apt-get install helm
 ~~
+
 ## Deploy the NGINX Ingress Controller
 
 ~~
@@ -23,6 +24,7 @@ $ helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
 ~~
 $ helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
 ~~
+
 ~~
 $ helm repo update
 Hang tight while we grab the latest from your chart repositories...
@@ -32,6 +34,7 @@ Hang tight while we grab the latest from your chart repositories...
 ...Successfully got an update from the "coreos" chart repository
 Update Complete. ⎈ Happy Helming!⎈
 ~~
+
 ~~
 $ helm install quickstart ingress-nginx/ingress-nginx
 NAME: quickstart
@@ -41,6 +44,7 @@ STATUS: deployed
 REVISION: 1
 TEST SUITE: None
 ~~
+
 ~~
 $ kubectl get svc
 NAME                                            TYPE           CLUSTER-IP       EXTERNAL-IP   PORT(S)                      AGE
@@ -51,6 +55,7 @@ quickstart-ingress-nginx-controller-admission   ClusterIP      10.109.5.194     
 
 ## Deploying Pods with Deployment
 #### app-deployment.yml
+	
 ~~
 ---
 apiVersion: apps/v1
@@ -134,12 +139,14 @@ spec:
               value: "video.hostdevops.xyz"
 ~~
 
+	
 ~~
 $ kubectl apply -f app-deployment.yml
 deployment.apps/blog.hostdevops.xyz created
 deployment.apps/wiki.hostdevops.xyz created
 deployment.apps/video.hostdevops.xyz created
 ~~
+	
 ~~
 $ kubectl get deploy
 NAME                                  READY   UP-TO-DATE   AVAILABLE   AGE
@@ -151,6 +158,7 @@ wiki.hostdevops.xyz
 
 ## Creating Service-Cluster IP for Pods
 #### app-service.yml
+	
 ~~
 ---
 apiVersion: v1
@@ -195,12 +203,14 @@ spec:
   selector:
     app: video.hostdevops.xyz
 ~~
+	
 ~~
 $ kubectl apply -f app-service.yml
 service/blog-hostdevops-xyz created
 service/wiki-hostdevops-xyz created
 service/video-hostdevops-xyz created
 ~~
+	
 ~~
 ~$ kubectl get svc
 NAME                                            TYPE           CLUSTER-IP       EXTERNAL-IP   PORT(S)                      AGE
@@ -211,11 +221,13 @@ quickstart-ingress-nginx-controller-admission   ClusterIP      10.109.5.194     
 video-hostdevops-xyz                            ClusterIP      10.96.107.231    <none>        80/TCP                       29s
 wiki-hostdevops-xyz                             ClusterIP      10.101.221.31    <none>        80/TCP                       29s
 ~~
+	
 ## Create ingress resource
 An ingress resource is what Kubernetes uses to expose this application service outside the cluster.
 You will need to modify this ingress manifest file to reflect the domain that you own or control to complete this example.
 
 ### ssl-ingress-hosts.yml
+	
 ~~
 apiVersion: networking.k8s.io/v1
 kind: Ingress
@@ -266,6 +278,7 @@ spec:
             port:
               number: 80
 ~~
+	
 ~~
 $ kubectl apply -f ssl-ingress-hosts.yml
 ingress.networking.k8s.io/hostdevops created
@@ -307,6 +320,7 @@ Hang tight while we grab the latest from your chart repositories...
 ...Successfully got an update from the "jetstack" chart repository
 Update Complete. ⎈Happy Helming!⎈
 ~~
+	
 ~~
 $ kubectl apply -f https://github.com/jetstack/cert-manager/releases/download/v1.5.4/cert-manager.crds.yaml
 customresourcedefinition.apiextensions.k8s.io/certificaterequests.cert-manager.io created
@@ -316,7 +330,9 @@ customresourcedefinition.apiextensions.k8s.io/clusterissuers.cert-manager.io cre
 customresourcedefinition.apiextensions.k8s.io/issuers.cert-manager.io created
 customresourcedefinition.apiextensions.k8s.io/orders.acme.cert-manager.io created
 ~~
+	
 To install the cert-manager Helm chart, use the Helm install command as described below.
+	
 ~~
 $ helm install \
 >   cert-manager jetstack/cert-manager \
@@ -368,6 +384,7 @@ spec:
         ingress:
           class:  nginx
 ~~
+	
 ~~
 $ kubectl apply -f issue-letsencrypt.yml
 issuer.cert-manager.io/letsencrypt-prod created
@@ -378,6 +395,7 @@ issuer.cert-manager.io/letsencrypt-prod created
 Update the ingress by adding the annotations that were commented out in our earlier ingress resource manifest file and add the new secretName for TLS(quickstart-hostdevops-tls).
 
 ### ssl-ingress-hosts.yml
+	
 ~~
 ---
 apiVersion: networking.k8s.io/v1
@@ -430,6 +448,7 @@ spec:
             port:
               number: 80
 ~~
+	
 ~~
 $ kubectl apply -f ssl-ingress-hosts.yml
 ingress.networking.k8s.io/hostdevops configured
@@ -476,7 +495,9 @@ Metadata:
         f:usages:
 ~~
 
+	
 The ‘Certificate’ resource will be updated to reflect the state of the issuance process. If all is well, you should be able to ‘describe’ the Certificate and see something like the below:
+	
 ~~
 $  kubectl describe certificate quickstart-hostdevops-tls
 Name:         quickstart-hostdevops-tls
@@ -546,6 +567,8 @@ Events:
   Normal  Issuing    2m24s (x3 over 18m)  cert-manager  The certificate has been successfully issued
 
 ~~
+	
+~~	
 $ kubectl describe order quickstart-hostdevops-tls-69v6z
 Events:
   Type    Reason    Age    From          Message
@@ -555,7 +578,7 @@ Events:
   Normal  Created   4m3s   cert-manager  Created Challenge resource "quickstart-hostdevops-tls-69v6z-4286263257-667256632" for domain "wiki.hostdevops.xyz"
   Normal  Complete  3m12s  cert-manager  Order completed successfully
 ~~
-~~
+	
 
 ## Results
 
