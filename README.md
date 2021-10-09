@@ -2,16 +2,17 @@
 
 In this guide, we’ll set up the Kubernetes-maintained Nginx Ingress Controller, and create some Ingress Resources to route traffic to several dummy backend applications. Once we’ve set up the Ingress, we’ll install cert-manager into our cluster to manage and provision TLS certificates for encrypting HTTP traffic to the Ingress. We will be using Helm package manager to install NGINX Ingress controller and Cert Manager. 
 
-![alt text](![Alt Text](![Alt Text](https://i.ibb.co/tCyBrNq/Ingress-drawio.png)))
+![Alt Text](https://i.ibb.co/tCyBrNq/Ingress-drawio.png)
+
 
 ## Install Helm
 
 ~~
-$ curl https://baltocdn.com/helm/signing.asc | sudo apt-key add -
-$ sudo apt-get install apt-transport-https --yes
-$ echo "deb https://baltocdn.com/helm/stable/debian/ all main" | sudo tee /etc/apt/sources.list.d/helm-stable-debian.list
-$ sudo apt-get update
-$ sudo apt-get install helm
+curl https://baltocdn.com/helm/signing.asc | sudo apt-key add -
+sudo apt-get install apt-transport-https --yes
+echo "deb https://baltocdn.com/helm/stable/debian/ all main" | sudo tee /etc/apt/sources.list.d/helm-stable-debian.list
+sudo apt-get update
+sudo apt-get install helm
 ~~
 
 ## Deploy the NGINX Ingress Controller
