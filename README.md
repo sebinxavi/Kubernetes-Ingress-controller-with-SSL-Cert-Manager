@@ -203,9 +203,9 @@ spec:
       targetPort: 80
   selector:
     app: video.hostdevops.xyz
-~~
+~~~
 	
-~~
+~~~
 $ kubectl apply -f app-service.yml
 service/blog-hostdevops-xyz created
 service/wiki-hostdevops-xyz created
