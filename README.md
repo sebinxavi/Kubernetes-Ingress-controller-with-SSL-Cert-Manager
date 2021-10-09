@@ -462,39 +462,6 @@ quickstart-ingress-nginx-admission     Opaque                                3  
 quickstart-ingress-nginx-token-8bslt   kubernetes.io/service-account-token   3      51m
 sh.helm.release.v1.quickstart.v1       helm.sh/release.v1                    1      51m
 ~~~
-
-The ‘Certificate’ resource will be updated to reflect the state of the issuance process. If all is well, you should be able to ‘describe’ the Certificate and see something like the below:
-~~~
-$  kubectl describe certificate quickstart-hostdevops-tls
-Name:         quickstart-hostdevops-tls
-Namespace:    default
-Labels:       <none>
-Annotations:  <none>
-API Version:  cert-manager.io/v1
-Kind:         Certificate
-Metadata:
-  Creation Timestamp:  2021-10-09T14:55:46Z
-  Generation:          1
-  Managed Fields:
-    API Version:  cert-manager.io/v1
-    Fields Type:  FieldsV1
-    fieldsV1:
-      f:metadata:
-        f:ownerReferences:
-          .:
-          k:{"uid":"94d33cbc-a223-467a-8e29-40bb61afe664"}:
-      f:spec:
-        .:
-        f:dnsNames:
-        f:issuerRef:
-          .:
-          f:group:
-          f:kind:
-          f:name:
-        f:secretName:
-        f:usages:
-~~~
-
 	
 The ‘Certificate’ resource will be updated to reflect the state of the issuance process. If all is well, you should be able to ‘describe’ the Certificate and see something like the below:
 	
