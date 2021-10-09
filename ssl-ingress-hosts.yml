@@ -1,0 +1,49 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: hostdevops
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+    cert-manager.io/issuer: "letsencrypt-prod"
+
+spec:
+  tls:
+  - hosts:
+    - blog.hostdevops.xyz
+    - wiki.hostdevops.xyz
+    - video.hostdevops.xyz
+    secretName: quickstart-hostdevops-tls
+
+  rules:
+  - host: blog.hostdevops.xyz
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: blog-hostdevops-xyz
+            port:
+              number: 80
+
+  - host: wiki.hostdevops.xyz
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: wiki-hostdevops-xyz
+            port:
+              number: 80
+
+  - host: video.hostdevops.xyz
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: video-hostdevops-xyz
+            port:
+              number: 80

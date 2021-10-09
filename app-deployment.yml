@@ -1,0 +1,81 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: blog.hostdevops.xyz
+  labels:
+    app: blog.hostdevops.xyz
+        
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      app: blog.hostdevops.xyz
+  template:
+    metadata:
+      labels:
+        app: blog.hostdevops.xyz
+    spec:
+      containers:
+        - name: blog-hostdevops-xyz
+          image: sebinxavi/k8s-message:latest
+          ports:
+            - containerPort: 80
+          env:
+            - name: MESSAGE
+              value: "blog.hostdevops.xyz"
+          
+                
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: wiki.hostdevops.xyz
+  labels:
+    app: wiki.hostdevops.xyz
+
+spec:    
+  replicas: 4
+  selector:
+    matchLabels:
+      app: wiki.hostdevops.xyz
+  template:       
+    metadata:
+      labels:
+        app: wiki.hostdevops.xyz            
+    spec:    
+      containers:      
+        - name: wiki-hostdevops-xyz
+          image: sebinxavi/k8s-message:latest
+          ports:
+            - containerPort: 80
+          env:
+            - name: MESSAGE
+              value: "wiki.hostdevops.xyz"
+                
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: video.hostdevops.xyz
+  labels:
+    app: video.hostdevops.xyz
+        
+spec:    
+  replicas: 4
+  selector:
+    matchLabels:
+      app: video.hostdevops.xyz
+  template:        
+    metadata:
+      labels:
+        app: video.hostdevops.xyz            
+    spec:    
+      containers:      
+        - name: video-hostdevops-xyz
+          image: sebinxavi/k8s-message:latest
+          ports:
+            - containerPort: 80
+          env:
+            - name: MESSAGE
+              value: "video.hostdevops.xyz"

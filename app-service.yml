@@ -1,0 +1,42 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: blog-hostdevops-xyz
+    
+spec:    
+  type: ClusterIP
+  ports:
+    - port: 80
+      targetPort: 80
+  selector:
+    app: blog.hostdevops.xyz
+        
+        
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: wiki-hostdevops-xyz
+    
+spec:    
+  type: ClusterIP
+  ports:
+    - port: 80
+      targetPort: 80
+  selector:
+    app: wiki.hostdevops.xyz
+           
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: video-hostdevops-xyz
+    
+spec:    
+  type: ClusterIP
+  ports:
+    - port: 80
+      targetPort: 80
+  selector:
+    app: video.hostdevops.xyz
