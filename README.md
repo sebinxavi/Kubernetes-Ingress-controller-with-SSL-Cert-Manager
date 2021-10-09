@@ -213,7 +213,7 @@ service/video-hostdevops-xyz created
 ~~~
 	
 ~~~
-~$ kubectl get svc
+$ kubectl get svc
 NAME                                            TYPE           CLUSTER-IP       EXTERNAL-IP   PORT(S)                      AGE
 blog-hostdevops-xyz                             ClusterIP      10.101.114.209   <none>        80/TCP                       29s
 kubernetes                                      ClusterIP      10.96.0.1        <none>        443/TCP                      7h57m
