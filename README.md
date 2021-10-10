@@ -361,7 +361,7 @@ https://cert-manager.io/docs/usage/ingress/
 
 ## Configure Let’s Encrypt Issuer
 
-Modify the below ingress manifest file and update the email address to your own. This email required by Let’s Encrypt and used to notify you of certificate expiration and updates.
+Modify the below ingress manifest file and update the email address to your own. This email is required by Let’s Encrypt and used to notify you of certificate expiration and updates.
 
 ### issue-letsencrypt.yml
 
